@@ -1,14 +1,22 @@
-var json = require('../data/cidades.json')
+/* var json = require('../data/cidades.json') */
+var json = {
+    "dasdasda": "dasdas",
+    "cidades": [{
+            "id": "fortaleza",
+            "value": 5,
+            "nome": "Fortaleza"
+        },
+        {
+            "id": "acarau",
+            "value": 30,
+            "nome": "Acaraú"
+        }
+    ]
+}
 
 function percorrerArray() {
     json.cidades.forEach(e => {
-        console.log(e.id)
-        if (e.id <= 10) {
-            console.log('value maior que 10')
-        } else {
-            console.log('value menor que 10')
-        }
-        console.log(e.value)
+        
     });
 }
 
