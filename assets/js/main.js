@@ -3,32 +3,32 @@ var json = {
     "dasdasda": "dasdas",
     "cidades": [{
             "id": "fortaleza",
-            "value": 85,
+            "value": 12,
             "nome": "Fortaleza"
         },
         {
             "id": "acarau",
-            "value": 12,
+            "value": 1,
             "nome": "Acaraú"
         },
         {
             "id": "marco",
-            "value": 158,
+            "value": 12,
             "nome": "Marco"
         },
         {
             "id": "sobral",
-            "value": 255,
+            "value": 14,
             "nome": "Sobral"
         },
         {
             "id": "santa-quiteria",
-            "value": 120,
+            "value": 63,
             "nome": "Santa quitéria"
         },
         {
             "id": "caninde",
-            "value": 56,
+            "value": 12,
             "nome": "Canindé"
         },
         {
@@ -41,6 +41,16 @@ var json = {
             "value": 89,
             "nome": "Acarape"
         },
+        {
+            "id": "quixeramobim",
+            "value": 26,
+            "nome": "Quixeramobim"
+        },
+        {
+            "id": "taua",
+            "value": 56,
+            "nome": "Tauá"
+        }
     ]
 }
 
@@ -48,11 +58,14 @@ var json = {
 const scale = []
 
 function percorrerArray() {
-    json.cidades.forEach((e, index) => {
+    json.cidades.forEach( e => {
         changeColor(e.id, e.value)
-        makeScale(e.value, index)
+        
+        // gera escala
+        scale.push(e.value)
     });
-    console.log(scale);
+
+    console.log('escala: ' + scale)
 }
 
 function changeColor(id) {
@@ -60,10 +73,28 @@ function changeColor(id) {
     elem.style.fill = `rgba(0, 80, 240, ${Math.random()})`
 }
 
+function generateScale () {
+    // Iniciando variavel total
+    let total = 0;
 
+    // fazendo soma dos elementos do array de escala
+    for(let i = 0; i < scale.length; i++) {
+        total += parseFloat(scale[i])
+    }
+    total = Math.floor(total
+        )
 
-function makeScale(value, index){
-    scale.push(value)
+    // Gerar Intervalos
+    let interval = total / 10
+    console.log(' total:' + interval)
+
+    // Array de intervalos
+    let intervalScale = [0]
+    for(let i = 0; i <= 9; i++) {
+        intervalScale.push(interval+=intervalScale[i])
+    }
+    console.log('escala de interval: ' + intervalScale)
 }
 
 percorrerArray()
+generateScale()
