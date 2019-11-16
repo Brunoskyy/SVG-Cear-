@@ -86,14 +86,27 @@ function generateScale () {
 
     // Gerar Intervalos
     let interval = total / 10
-    console.log(' total:' + interval)
+    console.log(' media dos intervalos:' + interval)
 
     // Array de intervalos
-    let intervalScale = [0]
-    for(let i = 0; i <= 9; i++) {
+    this.intervalScale = [0]
+    for(let i = 0; i < 9; i++) {
         intervalScale.push(interval+=intervalScale[i])
     }
     console.log('escala de interval: ' + intervalScale)
+
+    // CRIADOR DE GRADIENTE DAS ESCALAS
+    // selecionando elementos da escala
+    const elems = document.querySelectorAll('.escala div')
+
+    //mudando a opacidade conforme o numero de elementos
+    for(i = 0; i<9 ; i++) {
+        
+        // muda a cor de cada elemento da escala
+        const elem = elems[i]
+        elem.style.backgroundColor = `rgba(0, 80, 240, 0.${i})`
+        
+    }
 }
 
 percorrerArray()
