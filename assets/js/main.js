@@ -50,7 +50,13 @@ var json = {
             "id": "taua",
             "value": 56,
             "nome": "Tauá"
+        },
+        {
+            "id": "jaguaretama",
+            "value": 15,
+            "nome": "Jaguaretama"
         }
+
     ]
 }
 
@@ -104,7 +110,7 @@ function generateScale () {
         
         // muda a cor de cada elemento da escala
         const elem = elems[i]
-        elem.style.backgroundColor = `rgba(0, 80, 240, 0.${i})`
+        elem.style.backgroundColor = `rgba(0, 80, 240, 0.${i+1})`
         
     }
 }
