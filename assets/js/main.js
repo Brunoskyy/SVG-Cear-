@@ -1,9 +1,9 @@
 /* var json = require('../data/cidades.json') */
 var json = {
-    "dasdasda": "dasdas",
+    "categoria": "Densidade Demográfica",
     "cidades": [{
             "id": "fortaleza",
-            "value": 12,
+            "value": 'asfmnsajudhfbasdfnhuasnfuasnfuaids',
             "nome": "Fortaleza"
         },
         {
@@ -69,6 +69,8 @@ function percorrerArray() {
         
         // gera escala
         scale.push(e.value)
+
+        generatePopover(json.categoria, e.id, e.nome, e.value)
     });
 
     console.log('escala: ' + scale)
@@ -87,11 +89,10 @@ function generateScale () {
     for(let i = 0; i < scale.length; i++) {
         total += parseFloat(scale[i])
     }
-    total = Math.floor(total
-        )
+    total = Math.floor(total)
 
     // Gerar Intervalos
-    let interval = total / 10
+    let interval = total / 9
     console.log(' media dos intervalos:' + interval)
 
     // Array de intervalos
@@ -113,6 +114,25 @@ function generateScale () {
         elem.style.backgroundColor = `rgba(0, 80, 240, 0.${i+1})`
         
     }
+}
+
+
+function generatePopover(categoria, id, nome, value) {
+    document.getElementById(`${id}`).addEventListener("mouseover", function(event) {
+        var posX = event.clientX
+        var posY = event.clientY
+        console.log(posX)
+        console.log(posY)
+        // console.log(`${categoria}`)
+        console.log(`${nome}`)
+        // console.log(`${value}`)
+
+        document.querySelector('.pop').style.top = `${posY}px`
+        document.querySelector('.pop').style.left = `${posX/2}px`
+        document.querySelector('.pop').style.display = 'block'
+        document.querySelector('.pop .city').innerHTML = `${nome}`
+        document.querySelector('.pop .category').innerHTML = `${categoria}: ${value}`
+    })
 }
 
 percorrerArray()
