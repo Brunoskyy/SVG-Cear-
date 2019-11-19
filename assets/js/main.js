@@ -3,7 +3,7 @@ var json = {
     "categoria": "Densidade Demográfica",
     "cidades": [{
             "id": "fortaleza",
-            "value": 'asfmnsajudhfbasdfnhuasnfuasnfuaids',
+            "value": 64,
             "nome": "Fortaleza"
         },
         {
@@ -64,16 +64,15 @@ var json = {
 const scale = []
 
 function percorrerArray() {
-    json.cidades.forEach( e => {
+    json.cidades.forEach(e => {
         changeColor(e.id, e.value)
-        
+
         // gera escala
         scale.push(e.value)
-
         generatePopover(json.categoria, e.id, e.nome, e.value)
     });
 
-    console.log('escala: ' + scale)
+    console.log('scale: ' + scale.sort())
 }
 
 function changeColor(id) {
@@ -81,50 +80,44 @@ function changeColor(id) {
     elem.style.fill = `rgba(0, 80, 240, ${Math.random()})`
 }
 
-function generateScale () {
-    // Iniciando variavel total
-    let total = 0;
+function generateScale() {
 
-    // fazendo soma dos elementos do array de escala
-    for(let i = 0; i < scale.length; i++) {
-        total += parseFloat(scale[i])
-    }
-    total = Math.floor(total)
+    // Instancía maior e menor valor do Array
+    let maiorValor = Math.max(...scale)
 
-    // Gerar Intervalos
-    let interval = total / 9
-    console.log(' media dos intervalos:' + interval)
+    // Gerando razão da progressão aritmética
+    let interval = maiorValor / 9;
+    console.log(' intervals average:' + interval)
 
     // Array de intervalos
     this.intervalScale = [0]
-    for(let i = 0; i < 9; i++) {
-        intervalScale.push(interval+=intervalScale[i])
+    console.log(intervalScale);
+    for (let i = 0; i <= 9; i++) {
+        intervalScale.push(Math.floor(interval) + intervalScale[i])
     }
-    console.log('escala de interval: ' + intervalScale)
+    console.log('interval scale: ' + intervalScale)
 
     // CRIADOR DE GRADIENTE DAS ESCALAS
     // selecionando elementos da escala
     const elems = document.querySelectorAll('.escala div')
 
     //mudando a opacidade conforme o numero de elementos
-    for(i = 0; i<9 ; i++) {
+    for (i = 0; i < 9; i++) {
         
         // muda a cor de cada elemento da escala
         const elem = elems[i]
         elem.style.backgroundColor = `rgba(0, 80, 240, 0.${i+1})`
-        
     }
 }
 
 
 function generatePopover(categoria, id, nome, value) {
-    document.getElementById(`${id}`).addEventListener("mouseover", function(event) {
+    document.getElementById(`${id}`).addEventListener("mouseover", function (event) {
         var posX = event.clientX
         var posY = event.clientY
         console.log(posX)
         console.log(posY)
         // console.log(`${categoria}`)
-        console.log(`${nome}`)
         // console.log(`${value}`)
 
         document.querySelector('.pop').style.top = `${posY}px`
