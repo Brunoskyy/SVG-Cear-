@@ -131,8 +131,27 @@ function generatePopover(categoria, id, nome, value) {
     })
 }
 
+function setScale() {
+    json.cidades.forEach(e => {
+        const elem = document.getElementById(`${e.id}`)
+        const elemsScale = document.querySelectorAll('.escala div')
+
+        elem.addEventListener("mouseover", function() {
+            for (const i in intervalScale) {
+                if (e.value <= intervalScale[Number(i)+1]) {        
+                    elemsScale[i].style.border = '1px solid rgba(0, 0, 0, 1)'
+                    break
+                }
+            }
+        })
+    })
+}
+
+// Muda cor do elemento do mapa de acordo com a value do mesmo elemento
 function changeColor() {
+    // percorre o array
     json.cidades.forEach((e, index) => {
+        // captura o elemento pelo id e 
         const elem = document.getElementById(`${e.id}`)
         if(e.value <= intervalScale[1]){
             elem.style.fill = 'rgba(0, 80, 240, 0.1)'
@@ -161,4 +180,5 @@ function changeColor() {
 percorrerArray()
 generateScale()
 changeColor()
+setScale()
 // console.log(intervalScale + ' <= here');
