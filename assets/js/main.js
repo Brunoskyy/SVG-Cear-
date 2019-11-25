@@ -113,15 +113,11 @@ function generateScale() {
     return intervalScale, scale;
 }
 
-
+// Gera e posiciona o popover com interação do mouse
 function generatePopover(categoria, id, nome, value) {
     document.getElementById(`${id}`).addEventListener("mouseover", function (event) {
         var posX = event.clientX
         var posY = event.clientY
-        // console.log(posX)
-        // console.log(posY)
-        // console.log(`${categoria}`)
-        // console.log(`${value}`)
 
         document.querySelector('.pop').style.top = `${posY}px`
         document.querySelector('.pop').style.left = `${posX/2}px`
@@ -131,12 +127,21 @@ function generatePopover(categoria, id, nome, value) {
     })
 }
 
+// Função que gera escala visual na parte de baixo do mapa
 function setScale() {
     json.cidades.forEach(e => {
         const elem = document.getElementById(`${e.id}`)
         const elemsScale = document.querySelectorAll('.escala div')
 
+        // quando cursor passa em cima do elemento é ativada a função
         elem.addEventListener("mouseover", function() {
+            
+            // primeiro retira a borda de todos
+            elemsScale.forEach( e => {
+                e.style.border = 'none'
+            })
+
+            // poe a borda no elemento específico
             for (const i in intervalScale) {
                 if (e.value <= intervalScale[Number(i)+1]) {        
                     elemsScale[i].style.border = '1px solid rgba(0, 0, 0, 1)'
@@ -150,7 +155,7 @@ function setScale() {
 // Muda cor do elemento do mapa de acordo com a value do mesmo elemento
 function changeColor() {
     // percorre o array
-    json.cidades.forEach((e, index) => {
+    json.cidades.forEach((e) => {
         // captura o elemento pelo id e 
         const elem = document.getElementById(`${e.id}`)
         if(e.value <= intervalScale[1]){
@@ -181,4 +186,3 @@ percorrerArray()
 generateScale()
 changeColor()
 setScale()
-// console.log(intervalScale + ' <= here');
