@@ -127,6 +127,14 @@ function generatePopover(categoria, id, nome, value) {
     })
 }
 
+function closePopover() {
+    const popOver = document.querySelector('.pop')
+    const btnClose = document.querySelector('.pop .btn-close')
+    btnClose.addEventListener('click', function(){
+        popOver.style.display = 'none'
+    })
+}
+
 // Função que gera escala visual na parte de baixo do mapa
 function setScale() {
     json.cidades.forEach(e => {
@@ -186,3 +194,4 @@ percorrerArray()
 generateScale()
 changeColor()
 setScale()
+closePopover()
